@@ -2,6 +2,12 @@ export const Status = {
   Published: "Published",
   NotPublished: "NotPublished",
 };
+export const types = {
+  experience: "experiences",
+  project: "project",
+  icon: "icon",
+  image: "image",
+};
 export const TOKEN_MAX_AGE = 24 * 60 * 60 * 3;
 export const Colors = {
   Reset: "\x1b[0m",

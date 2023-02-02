@@ -10,6 +10,7 @@ import Debug from "./utils/Debug.mjs";
 import authorizeAdmin from "./middlewares/authorizeAdmin.mjs";
 import experiencesRouter from "./routes/experiences.route.mjs";
 import { ErrorResponse } from "./utils/ErrorResponse.mjs";
+import methodOverride from "method-override";
 dotenv.config();
 if (process.env.DEV === "TRUE") Debug.enabled = true;
 else Debug.enabled = false;
@@ -27,6 +28,7 @@ app.use(express.static("public"));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(methodOverride("_method"))
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -40,7 +42,7 @@ app.use(
     resave: false,
   })
 );
-app.use("/admin/experiences/", authorizeAdmin, experiencesRouter);
+app.use("/admin/experience/", authorizeAdmin, experiencesRouter);
 app.use("/admin/", adminRouter);
 app.get("*", (_, __, next) => {
   const err = new ErrorResponse("Page Not Found");

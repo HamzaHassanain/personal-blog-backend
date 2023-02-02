@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { Status } from "../utils/consts.mjs";
 
 // import Debug from "../utils/Debug.mjs";
 
@@ -12,6 +13,10 @@ const itemSchema = new Schema({
     required: true,
   },
   link: String,
+  status: {
+    type: String,
+    default: Status.NotPublished,
+  },
 });
 
 export default model("Item", itemSchema);
