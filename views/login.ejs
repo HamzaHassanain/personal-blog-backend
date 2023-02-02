@@ -45,6 +45,9 @@
           <form action="/admin/login" method="post">
             <div class="row">
               <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <p style="color: red">
+                  <% if (err) { %> <%- err.error %> <% } %>
+                </p>
                 <div class="input-group">
                   <span class="input-group-addon form-text">username</span>
                   <input type="text" class="form-control" name="username" />

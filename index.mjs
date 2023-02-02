@@ -5,9 +5,11 @@ import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
 import ErrorHandler from "./middlewares/ErrorHandler.mjs";
-import adminRouter from "./routes/admin.route.mjs";
+import adminRouter from "./routes/auth.route.mjs";
 import Debug from "./utils/Debug.mjs";
 import authorizeAdmin from "./middlewares/authorizeAdmin.mjs";
+import experiencesRouter from "./routes/experiences.route.mjs";
+import { ErrorResponse } from "./utils/ErrorResponse.mjs";
 dotenv.config();
 if (process.env.DEV === "TRUE") Debug.enabled = true;
 else Debug.enabled = false;
@@ -38,10 +40,12 @@ app.use(
     resave: false,
   })
 );
+app.use("/admin/experiences/", authorizeAdmin, experiencesRouter);
 app.use("/admin/", adminRouter);
-
-app.get("/", authorizeAdmin, (req, res) => {
-  res.json({ message: "app is running properly ... ;}" });
+app.get("*", (_, __, next) => {
+  const err = new ErrorResponse("Page Not Found");
+  err.page = "404";
+  next(err);
 });
 app.use(ErrorHandler);
 mongoose.set("strictQuery", false);
