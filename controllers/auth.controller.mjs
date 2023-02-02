@@ -1,6 +1,6 @@
 import Debug from "../utils/Debug.mjs";
 import { createToken } from "../utils/jwt.mjs";
-import userModel from "../models/item.model.mjs";
+import userModel from "../models/blog.model.mjs";
 import { SuccessResponse } from "../utils/successResponse.mjs";
 import { AuthError } from "../utils/ErrorResponse.mjs";
 

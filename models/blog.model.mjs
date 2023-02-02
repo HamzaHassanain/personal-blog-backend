@@ -3,20 +3,21 @@ import { Status } from "../utils/consts.mjs";
 
 // import Debug from "../utils/Debug.mjs";
 
-const itemSchema = new Schema({
+const blogSchema = new Schema({
   title: String,
-  start_date: String,
-  end_date: String,
+  publish_date: String,
   describtion: String,
-  type: {
+  body:String,
+  image: String,
+  tags:[String],
+  type: { // you can call it category
     type: String,
     required: true,
   },
-  link: String,
   status: {
     type: String,
     default: Status.NotPublished,
   },
 });
 
-export default model("Item", itemSchema);
+export default model("Blog", blogSchema);

@@ -3,7 +3,7 @@ export const Status = {
   NotPublished: "NotPublished",
 };
 export const types = {
-  experience: "experiences",
+  blog: "blogs",
   project: "project",
   icon: "icon",
   image: "image",

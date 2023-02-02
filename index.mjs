@@ -8,13 +8,13 @@ import ErrorHandler from "./middlewares/ErrorHandler.mjs";
 import adminRouter from "./routes/auth.route.mjs";
 import Debug from "./utils/Debug.mjs";
 import authorizeAdmin from "./middlewares/authorizeAdmin.mjs";
-import experiencesRouter from "./routes/experiences.route.mjs";
+import blogsRouter from "./routes/blogs.route.mjs";
 import { ErrorResponse } from "./utils/ErrorResponse.mjs";
 import methodOverride from "method-override";
 dotenv.config();
 if (process.env.DEV === "TRUE") Debug.enabled = true;
 else Debug.enabled = false;
-const app = express();
+const app = express()
 const port = process.env.PORT || 4000;
 
 const corsOptions = {
@@ -42,7 +42,7 @@ app.use(
     resave: false,
   })
 );
-app.use("/admin/experience/", authorizeAdmin, experiencesRouter);
+app.use("/admin/blog/", authorizeAdmin, blogsRouter);
 app.use("/admin/", adminRouter);
 app.get("*", (_, __, next) => {
   const err = new ErrorResponse("Page Not Found");
