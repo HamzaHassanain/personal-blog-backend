@@ -13,7 +13,7 @@ export const getblogsPage = async (req, res, next) => {
     const data = await itemModel.find({ type: types.blog });
     res.render(MAIN_PAGE, { err: null, data: [1, 12, 3, "", 4, 5, 5] });
   } catch (error) {
-    error.page = PAGE;
+    error.page = MAIN_PAGE;
     next(error);
   }
 };
@@ -30,7 +30,7 @@ export const getEditblogsPage = async (req, res, next) => {
   const _id = req.params.id;
   try {
     Debug.info(_id);
-    res.render(EDIT_PAGE, { err: null, data: {_id} });
+    res.render(EDIT_PAGE, { err: null, data: { _id } });
   } catch (error) {
     error.page = EDIT_PAGE;
     next(error);
@@ -40,7 +40,6 @@ export const handleAddblog = async (req, res, next) => {
   const { title, start_date, end_date, describtion, type } = req.body;
 
   try {
-    
     res.json({ success: "success" });
   } catch (error) {
     // error.page = PAGE;
@@ -51,8 +50,14 @@ export const handleEditblog = async (req, res, next) => {
   const { title, start_date, end_date, describtion, type } = req.body;
 
   try {
-    res.json({ success: "success" ,title, start_date, end_date, describtion, type });
-
+    res.json({
+      success: "success",
+      title,
+      start_date,
+      end_date,
+      describtion,
+      type,
+    });
   } catch (error) {
     // error.page = PAGE;
     next(error);

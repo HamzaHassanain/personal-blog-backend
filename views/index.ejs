@@ -20,14 +20,14 @@
           <hr />
           <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12">
-              <form action="">
+              <form action="/admin/dashbaord/?_method=put">
                 <!-- <h5>Role</h5> -->
                 <div class="col-lg-12 col-md-12">
                   <div class="form-group">
-                    <label>Role</label>
+                    <label>title</label>
                     <input
                       class="form-control input-group"
-                      placeholder="Role......"
+                      placeholder="Title......"
                     />
                     <!-- <p class="help-block">Help text here.</p> -->
                   </div>
@@ -36,19 +36,12 @@
                   <div class="form-group">
                     <input
                       class="form-control input-group"
-                      placeholder="start date..."
+                      placeholder="Type..."
                     />
                     <!-- <p class="help-block">Help text here.</p> -->
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <input
-                      class="form-control input-group"
-                      placeholder="end date..."
-                    />
-                  </div>
-                </div>
+
                 <div class="col-lg-12 col-md-12">
                   <div class="form-group">
                     <textarea
@@ -64,30 +57,45 @@
                     type="submit"
                     class="btn btn-success btn-lg full-width"
                   >
-                    success
+                    Save
                   </button>
                 </div>
               </form>
             </div>
             <div class="col-log-4 col-md-4 col-sm-12">
-              <form action="">
-                <input type="file" name="" id="" />
+              <form
+                action="/admin/dashboard/upload"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <input
+                  type="file"
+                  name="image"
+                  id="file-selector"
+                  onchange="PreviewImage();"
+                />
                 <div class="col-12">
                   <div class="form-group">
                     <input
                       class="form-control input-group"
                       value="/downloads/1672123640006.jpg"
                       placeholder="Image URL..."
+                      name="image_url"
                     />
                   </div>
                 </div>
-                <img src="/downloads/1672123640006.jpg" alt="" class="fix" />
+                <img
+                  src="/downloads/1672123640006.jpg"
+                  alt=""
+                  class="fix"
+                  id="preview"
+                />
                 <button type="submit" class="btn btn-success btn-md full-width">
                   save
                 </button>
               </form>
               <br />
-              <div class="form-actions">
+              <!-- <div class="form-actions">
                 <form action="#" method="post" class="button-form">
                   <button type="submit" class="btn btn-info">info</button>
                 </form>
@@ -97,7 +105,7 @@
                 <form action="#" method="post" class="button-form">
                   <button type="submit" class="btn btn-danger">danger</button>
                 </form>
-              </div>
+              </div> -->
             </div>
           </div>
           <br />
@@ -109,5 +117,16 @@
     </div>
 
     <%- include("./includes/footer.ejs") %>
+    <script type="text/javascript">
+      function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(
+          document.getElementById("file-selector").files[0]
+        );
+        oFReader.onload = function (oFREvent) {
+          document.getElementById("preview").src = oFREvent.target.result;
+        };
+      }
+    </script>
   </body>
 </html>

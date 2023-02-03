@@ -9,26 +9,30 @@ import adminRouter from "./routes/auth.route.mjs";
 import Debug from "./utils/Debug.mjs";
 import authorizeAdmin from "./middlewares/authorizeAdmin.mjs";
 import blogsRouter from "./routes/blogs.route.mjs";
+import dashboardRouter from "./routes/dashboard.route.mjs";
 import { ErrorResponse } from "./utils/ErrorResponse.mjs";
 import methodOverride from "method-override";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+
 dotenv.config();
 if (process.env.DEV === "TRUE") Debug.enabled = true;
 else Debug.enabled = false;
-const app = express()
+const app = express();
 const port = process.env.PORT || 4000;
 
 const corsOptions = {
   origin: process.env.ORIGIN_ALLOWED || "http://localhost:3000",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use(methodOverride("_method"))
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -43,8 +47,10 @@ app.use(
   })
 );
 app.use("/admin/blog/", authorizeAdmin, blogsRouter);
+app.use("/admin/dashboard/", authorizeAdmin, dashboardRouter);
+
 app.use("/admin/", adminRouter);
-app.get("*", (_, __, next) => {
+app.get("*", authorizeAdmin, (_, __, next) => {
   const err = new ErrorResponse("Page Not Found");
   err.page = "404";
   next(err);

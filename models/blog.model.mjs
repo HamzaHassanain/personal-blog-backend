@@ -7,10 +7,14 @@ const blogSchema = new Schema({
   title: String,
   publish_date: String,
   describtion: String,
-  body:String,
-  image: String,
-  tags:[String],
-  type: { // you can call it category
+  body: String,
+  image: {
+    id: String,
+    url: String,
+  },
+  tags: [String],
+  type: {
+    // you can call it category
     type: String,
     required: true,
   },
