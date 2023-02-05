@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <%- include("./includes/head.ejs") %>
-    <title>Add Something</title>
+    <title>Blogs</title>
   </head>
 
   <body>
@@ -13,7 +13,10 @@
         <div id="page-inner">
           <div class="row">
             <div class="col-md-12">
-              <h2>blogs</h2>
+              <h2>Blogs</h2>
+              <h2 style="color: red">
+                <% if (err) { %> <%- err.error %> <%- err.message %> <% } %>
+              </h2>
             </div>
           </div>
           <!-- /. ROW  -->
@@ -32,38 +35,46 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Role</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Publish Date</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% if (data) { %> <% for (const [i,item] of data.entries()) {
-                  %>
+                  <% if (data) { %> 
+                    <% for (const [i,item] of data.entries()) { %>
 
                   <tr>
-                    <td>3</td>
-                    <td>Game Developer</td>
-                    <td>2020</td>
-                    <td>2021</td>
+                    <td><%- i+1 %></td>
+                    <td> <a href="<%- "/admin/blog/edit/" + item.id %>"> <%- item.title %> </a></td>
+                    <td> <strong> <%- item.type %> </strong> </td>
+                    <td><%- item.publish_date %>  </td>
+                    <td> <strong>  <%- item.status %> </strong>  </td>
                     <td class="forms-container">
-                      <form action="#" method="post" class="button-form">
-                        <button type="submit" class="btn btn-info">info</button>
-                      </form>
-                      <form action="#" method="post" class="button-form">
-                        <button type="submit" class="btn btn-warning">
-                          warning
+                      <form action="<%- "/admin/blog/publish/" + item.id %>" 
+                        method="post" class="button-form">
+                        <button type="submit" class="btn btn-info">
+                          Publish
                         </button>
                       </form>
-                      <form action="#" method="post" class="button-form">
+                      <form action="<%- "/admin/blog/un-publish/" + item.id %>" 
+                        method="post" class="button-form">
+                        <button type="submit" class="btn btn-warning">
+                          Un Publish
+                        </button>
+                      </form>
+                      <form action="<%- "/admin/blog/delete/" + item.id+"?_method=DELETE" %>" 
+                        method="post" class="button-form">
                         <button type="submit" class="btn btn-danger">
-                          danger
+                          Delete
                         </button>
                       </form>
                     </td>
                   </tr>
-                  <% } %> <% } %>
+                  <% } %> 
+                <% } %>
                 </tbody>
               </table>
             </div>

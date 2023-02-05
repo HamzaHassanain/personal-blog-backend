@@ -3,10 +3,9 @@ export const Status = {
   NotPublished: "NotPublished",
 };
 export const types = {
-  blog: "blogs",
-  project: "project",
+  blog: "blog",
+  dashboard: "dashboard",
   icon: "icon",
-  image: "image",
 };
 export const TOKEN_MAX_AGE = 24 * 60 * 60 * 3;
 export const Colors = {

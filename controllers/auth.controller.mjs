@@ -30,7 +30,7 @@ export const postLoginController = async (req, res, next) => {
       req.session.is_valid = "true";
       req.session.save((err) => {
         if (err) throw err;
-        res.redirect("/admin/");
+        res.redirect("/admin/dashboard");
       });
     });
   } catch (error) {

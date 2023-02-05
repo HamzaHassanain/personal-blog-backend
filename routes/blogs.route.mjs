@@ -6,10 +6,14 @@ import {
   getEditblogsPage,
   handleAddblog,
   handleEditblog,
-  handleToggleblog,
+  handlePublishblog,
+  handleUnPublishblog,
   handleDeleteblog,
+  handleDashboardUploadImage,
 } from "../controllers/blogs.controller.mjs";
 import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
+import parser from "../utils/fileUpload.mjs";
+import Debug from "../utils/Debug.mjs";
 
 const router = Router();
 
@@ -19,14 +23,14 @@ router.get("/edit/:id", authorizeAdmin, getEditblogsPage);
 
 router.post("/new", authorizeAdmin, handleAddblog);
 router.put("/edit/:id", authorizeAdmin, handleEditblog);
-router.put("/toggle/:id", authorizeAdmin, handleToggleblog);
+router.post("/publish/:id", authorizeAdmin, handlePublishblog);
+router.post("/un-publish/:id", authorizeAdmin, handleUnPublishblog);
 router.delete("/delete/:id", authorizeAdmin, handleDeleteblog);
-
-// router.get("/projects", authorizeAdmin, getAdminProjects);
-// router.get("/projects/edit:id", authorizeAdmin, getAdminEditProjects);
-// router.post("/projects/new", authorizeAdmin, addAdminProject);
-// router.put("/projects/edit", authorizeAdmin, editAdminProject);
-// router.put("/projects/toggle", authorizeAdmin, toggleAdminProject);
-// router.delete("/projects/delete", authorizeAdmin, deleteAdminProject);
+router.post(
+  "/upload/:id",
+  authorizeAdmin,
+  parser.single("image-upload"),
+  handleDashboardUploadImage
+);
 
 export default router;

@@ -14,42 +14,36 @@
           <div class="row">
             <div class="col-md-12">
               <h2>Add/Edit Blog Item</h2>
+              <h3 style="color: red">
+                <% if (err) { %> <%- err.error %> <%- err.message %>  <% } %>
+              </h3>
             </div>
           </div>
           <!-- /. ROW  -->
+          <!-- <h1>HERERERERE</h1> -->
           <hr />
-          <div class="row">
-            <form action="">
-              <div class="col-8 col-md-6 col-sm-12">
-                <input type="file" name="" id="" />
-                <div class="form-group">
-                  <input
-                    class="form-control input-group"
-                    value="/downloads/1672123640006.jpg"
-                    placeholder="Image URL..."
-                  />
-                </div>
-              </div>
-              <div class="col-4 col-md-6 col-sm-12" >
-                <img src="/downloads/1672123640006.jpg" alt="" class="fix" />
+          <% if (data._id) { %>
+            <div class="col-log-4 col-md-4 col-sm-12" id="ImageUpload">
+            <form action="<%=data?._id ? "/admin/blog/upload/"+data._id : ""%>"                 enctype="multipart/form-data"
+              method="POST">
+              <input
+                type="file"
+                name="image-upload"
+                id="file-selector"
+                onchange="PreviewImage();"
+              />
+
+                <img src="<%= data?.image?.url || "" %>" alt="<%=
+                data?.image?.id || "" %>" class="fix" id="preview" />
                 <button type="submit" class="btn btn-success btn-md full-width">
                   save
                 </button>
-              </div>
             </form>
+          
             <br />
-            <div class="col-12">
-              <form action="#" method="post" class="button-form">
-                <button type="submit" class="btn btn-info">info</button>
-              </form>
-              <form action="#" method="post" class="button-form">
-                <button type="submit" class="btn btn-warning">warning</button>
-              </form>
-              <form action="#" method="post" class="button-form">
-                <button type="submit" class="btn btn-danger">danger</button>
-              </form>
-            </div>
           </div>
+          <% } %>
+
           <hr>
           <form action="<%=data?._id ? "/admin/blog/edit/"+data._id+"?_method=put" : "/admin/blog/new/" %>" method="POST">
             <div class="row">
@@ -58,25 +52,28 @@
                 <div class="col-lg-12 col-md-12">
                   <div class="form-group">
                     <label>Title</label>
-                    <input class="form-control input-group" value="<%=data?.role || "" %>" name="title" placeholder="Title......"
+                    <input class="form-control input-group" value="<%=data?.title || "" %>" name="title" placeholder="Title......"
                     />
                     <!-- <p class="help-block">Help text here.</p> -->
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
+                    <label>Type</label>
                     <input class="form-control input-group" value="<%=data?.type || "" %>" name="type" placeholder="Blog Type..." />
                     <!-- <p class="help-block">Help text here.</p> -->
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
+                    <label>Publish Date</label>
                     <input class="form-control input-group" value="<%=data?.publish_date || "" %>" name="publish_date" placeholder="Publish Date..." />
                     <!-- <p class="help-block">Help text here.</p> -->
                   </div>
                 </div>
                 <div class="col-lg-12 col-md-12">
                   <div class="form-group">
+                    <label>Tags</label>
                     <input class="form-control input-group" value="<%=data?.tags || "" %>" name="tags" placeholder="Tags......"
                     />
                     <!-- <p class="help-block">Help text here.</p> -->
@@ -84,6 +81,7 @@
                 </div>
                 <div class="col-lg-12 col-md-12">
                   <div class="form-group">
+                    <label>Describtion</label>
                     <textarea
                       rows="4"
                       class="form-control input-group"
@@ -93,6 +91,7 @@
                   </div>
                 </div>
                 <div class="col-lg-12 col-md-12">
+                  <label>Body</label>
                   <div class="form-group">
                     <textarea
                       rows="24"
@@ -108,33 +107,29 @@
                   </button>
                 </div>
               </div>
-            </div>  
+            </div>
           </form>
           <br />
           <br />
           <hr />
-          <% if (data) { %>
-          <div class="row">
-            <div class="col-lg-6 col-md-12 form-actions">
-              <form action="#" method="post" class="button-form">
-                <button type="submit" class="btn btn-info">Publish</button>
-              </form>
-              <form action="#" method="post" class="button-form">
-                <button type="submit" class="btn btn-warning">
-                  Un Publish
-                </button>
-              </form>
-              <form action="#" method="post" class="button-form">
-                <button type="submit" class="btn btn-danger">Delete</button>
-              </form>
-            </div>
-          </div>
-          <% } %>
+         
         </div>
       </div>
       <!-- /. PAGE WRAPPER  -->
     </div>
 
     <%- include("./includes/footer.ejs") %>
+    <script type="text/javascript">
+      function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(
+          document.getElementById("file-selector").files[0]
+        );
+        oFReader.onload = function (oFREvent) {
+          document.getElementById("preview").src =
+            oFREvent.target.result;
+        };
+      }
+    </script>
   </body>
 </html>

@@ -12,9 +12,6 @@ import blogsRouter from "./routes/blogs.route.mjs";
 import dashboardRouter from "./routes/dashboard.route.mjs";
 import { ErrorResponse } from "./utils/ErrorResponse.mjs";
 import methodOverride from "method-override";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
 if (process.env.DEV === "TRUE") Debug.enabled = true;
@@ -48,8 +45,8 @@ app.use(
 );
 app.use("/admin/blog/", authorizeAdmin, blogsRouter);
 app.use("/admin/dashboard/", authorizeAdmin, dashboardRouter);
-
 app.use("/admin/", adminRouter);
+
 app.get("*", authorizeAdmin, (_, __, next) => {
   const err = new ErrorResponse("Page Not Found");
   err.page = "404";

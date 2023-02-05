@@ -9,7 +9,5 @@ const router = Router();
 
 router.get("/login", getLoginController);
 router.post("/login", postLoginController);
-router.get("/", authorizeAdmin, (req, res) =>
-  res.render("index", { err: null })
-);
+
 export default router;
