@@ -1,7 +1,7 @@
 import Debug from "../utils/Debug.mjs";
 import Blog from "../models/blog.model.mjs";
 import { ErrorResponse } from "../utils/ErrorResponse.mjs";
-import { Status } from "../utils/consts.mjs";
+import { Status, types } from "../utils/consts.mjs";
 import { v2 as cloudinary } from "cloudinary";
 
 const MAIN_PAGE = "blogs";
@@ -9,7 +9,9 @@ const EDIT_PAGE = "edit_blogs";
 
 export const getblogsPage = async (req, res, next) => {
   try {
-    const data = await Blog.find({}).sort({ createdAt: "desc" });
+    const data = await Blog.find({
+      type: { $nin: [types.dashboard, types.image, types.link] },
+    }).sort({ createdAt: "desc" });
     res.render(MAIN_PAGE, { err: null, data });
   } catch (error) {
     error.page = MAIN_PAGE;

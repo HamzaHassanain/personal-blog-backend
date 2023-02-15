@@ -161,7 +161,9 @@ body {
   grid-template-columns: 2fr 3fr 1fr;
   overflow-wrap: break-word;
 }
-
+.navbar-inverse {
+  background-color: black;
+}
 @media (min-width: 768px) {
   #page-wrapper {
     margin: 0 0 0 260px;

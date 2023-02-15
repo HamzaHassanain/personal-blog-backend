@@ -11,23 +11,21 @@ import {
   handleDeleteblog,
   handleBlogUploadImage,
 } from "../controllers/blogs.controller.mjs";
-import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
 import parser from "../middlewares/fileUpload.mjs";
 
 const router = Router();
 
-router.get("/", authorizeAdmin, getblogsPage);
-router.get("/new", authorizeAdmin, getNewblogPage);
-router.get("/edit/:id", authorizeAdmin, getEditblogsPage);
+router.get("/", getblogsPage);
+router.get("/new", getNewblogPage);
+router.get("/edit/:id", getEditblogsPage);
 
-router.post("/new", authorizeAdmin, handleAddblog);
-router.put("/edit/:id", authorizeAdmin, handleEditblog);
-router.post("/publish/:id", authorizeAdmin, handlePublishblog);
-router.post("/un-publish/:id", authorizeAdmin, handleUnPublishblog);
-router.delete("/delete/:id", authorizeAdmin, handleDeleteblog);
+router.post("/new", handleAddblog);
+router.put("/edit/:id", handleEditblog);
+router.post("/publish/:id", handlePublishblog);
+router.post("/un-publish/:id", handleUnPublishblog);
+router.delete("/delete/:id", handleDeleteblog);
 router.post(
   "/upload/:id",
-  authorizeAdmin,
   parser.single("image-upload"),
   handleBlogUploadImage
 );

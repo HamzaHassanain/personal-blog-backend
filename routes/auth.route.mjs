@@ -4,7 +4,6 @@ import {
   getLoginController,
 } from "../controllers/auth.controller.mjs";
 
-import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
 const router = Router();
 
 router.get("/login", getLoginController);

@@ -5,19 +5,13 @@ import {
   getImagesPage,
   handleDeleteImage,
 } from "../controllers/image.controller.mjs";
-import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
 import parser from "../middlewares/fileUpload.mjs";
 
 const router = Router();
 
-router.get("/", authorizeAdmin, getImagesPage);
+router.get("/", getImagesPage);
 
-router.post(
-  "/upload/",
-  authorizeAdmin,
-  parser.single("image"),
-  handleUploadImage
-);
-router.delete("/delete/:id", authorizeAdmin, handleDeleteImage);
+router.post("/upload/", parser.single("image"), handleUploadImage);
+router.delete("/delete/:id", handleDeleteImage);
 
 export default router;

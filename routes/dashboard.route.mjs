@@ -4,21 +4,16 @@ import {
   getDashboardPage,
   handleEditDashboard,
   handleDashboardUploadImage,
+  handleCreateNewLink,
+  handleDeleteLink,
 } from "../controllers/dashboard.controller.mjs";
 import parser from "../middlewares/fileUpload.mjs";
-import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
-
 const router = Router();
 
-router.get("/", authorizeAdmin, getDashboardPage);
+router.get("/", getDashboardPage);
+router.put("/edit", handleEditDashboard);
+router.post("/upload", parser.single("image"), handleDashboardUploadImage);
 
-router.put("/edit", authorizeAdmin, handleEditDashboard);
-
-router.post(
-  "/upload",
-  authorizeAdmin,
-  parser.single("image"),
-  handleDashboardUploadImage
-);
-
+router.post("/links/new", handleCreateNewLink);
+router.delete("/links/delete/:id", handleDeleteLink);
 export default router;

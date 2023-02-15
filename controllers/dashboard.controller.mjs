@@ -58,3 +58,34 @@ export const handleDashboardUploadImage = async (req, res, next) => {
   }
 };
 // {"fieldname":"image","originalname":"light.png","encoding":"7bit","mimetype":"image/png","path":"https://res.cloudinary.com/djf8tqwvs/image/upload/v1675594526/hamzahassanain.xyz/tj4opirwjzaxkebqweoq.png","size":11835,"filename":"hamzahassanain.xyz/tj4opirwjzaxkebqweoq"}
+
+export const handleCreateNewLink = async (req, res, next) => {
+  const { imageUrl, title, to } = req.body;
+  try {
+    const link = new Blog({
+      title,
+      type: types.link,
+      body: to,
+      image: {
+        url: imageUrl,
+        id: title,
+      },
+    });
+    await link.save();
+    res.redirect("/admin/dashboard/");
+  } catch (error) {
+    error.page = MAIN_PAGE;
+    next(error);
+  }
+};
+export const handleDeleteLink = async (req, res, next) => {
+  const _id = req.params.id;
+
+  try {
+    await Blog.findByIdAndDelete(_id);
+    res.redirect("/admin/dashboard/");
+  } catch (error) {
+    error.page = MAIN_PAGE;
+    next(error);
+  }
+};

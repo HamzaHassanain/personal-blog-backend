@@ -104,16 +104,22 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Title</label>
-                        <input class="form-control input-group" placeholder="Link Title Here...."/>
+                        <input class="form-control input-group" name="title" placeholder="Link Title Here...."/>
                       </div>
                     </div> 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
-                        <label>URL</label>
-                        <input class="form-control input-group" placeholder="URL Here...."/>
+                        <label>Image URL</label>
+                        <input class="form-control input-group" name="imageUrl" placeholder="URL Here...."/>
                       </div>
                     </div>
-                  
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <label>To</label>
+                      <input class="form-control input-group" name="to" placeholder="Where does this link goes to...."/>
+                    </div>
+                  </div> 
+                </div> 
                     <div class="col-lg-6 col-md-6">
                       <button type="submit" class="btn btn-success">
                         Add
@@ -134,7 +140,6 @@
                     <th>#</th>
                     <th>Icon</th>
                     <th>Title</th>
-                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -145,10 +150,9 @@
                   <tr>
                     <td><%- i+1 %></td>
                     <td> <img src="<%= item?.image?.url || "" %>" alt="<%=
-                      item?.image?.id || "" %>"  class="fix" width="64" />
+                      item?.image?.id || "" %>"   width="64" />
                        </td>
-                    <td> <strong> <%- item.title %> </strong> </td>
-                    <td> <strong>  <%- item.status %> </strong>  </td>
+                    <td> <a href="<%= item?.body || "" %>" target="_blank"> <strong> <%- item.title %> </strong> </a></td>
 
                     <td class="forms-container">
                       <form action="<%- "/admin/dashboard/links/delete/" + item.id+"?_method=DELETE" %>" 
