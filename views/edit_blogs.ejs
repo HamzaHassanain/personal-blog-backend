@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <%- include("./includes/head.ejs") %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <title>Add/Edit blog</title>
   </head>
   <body>
@@ -94,9 +95,10 @@
                   <label>Body</label>
                   <div class="form-group">
                     <textarea
-                      rows="24"
+                      rows="40"
                       class="form-control input-group"
                       name="body"
+                      id="simplemde"
                       placeholder="Body (Markdown)..."><%= data?.body || "" %></textarea>
                     <!-- <p class="help-block">Help text here.</p> -->
                   </div>
@@ -119,6 +121,10 @@
     </div>
 
     <%- include("./includes/footer.ejs") %>
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <script>
+    const simplemde = new SimpleMDE({ element: document.getElementById("simplemde") });
+    </script>
     <script type="text/javascript">
       function PreviewImage() {
         var oFReader = new FileReader();

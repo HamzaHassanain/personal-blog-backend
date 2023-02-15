@@ -163,6 +163,10 @@ body {
 }
 .navbar-inverse {
   background-color: black;
+  z-index: 5;
+}
+.editor-toolbar.fullscreen {
+  z-index: 40;
 }
 @media (min-width: 768px) {
   #page-wrapper {
