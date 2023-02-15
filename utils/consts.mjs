@@ -1,6 +1,6 @@
 export const Status = {
   Published: "Published",
-  NotPublished: "NotPublished",
+  NotPublished: "Not Published",
 };
 export const types = {
   blog: "blog",

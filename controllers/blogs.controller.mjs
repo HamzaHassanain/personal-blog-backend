@@ -3,7 +3,7 @@ import Blog from "../models/blog.model.mjs";
 import { ErrorResponse } from "../utils/ErrorResponse.mjs";
 import { Status, types } from "../utils/consts.mjs";
 import { v2 as cloudinary } from "cloudinary";
-
+import { marked } from "marked";
 const MAIN_PAGE = "blogs";
 const EDIT_PAGE = "edit_blogs";
 
@@ -45,6 +45,9 @@ export const handleAddblog = async (req, res, next) => {
 
   try {
     if (!body.type) throw new ErrorResponse("Blog Type is required");
+    if (body.body) {
+      body.parsed = marked.parse(body.body);
+    }
     const blog = new Blog(body);
     await blog.save();
     res.redirect("/admin/blog/edit/" + blog.id);
@@ -57,6 +60,9 @@ export const handleEditblog = async (req, res, next) => {
   const body = req.body;
   const _id = req.params.id;
   try {
+    if (body.body) {
+      body.parsed = marked.parse(body.body);
+    }
     await Blog.findByIdAndUpdate(_id, body);
     res.redirect("/admin/blog/edit/" + _id);
   } catch (error) {

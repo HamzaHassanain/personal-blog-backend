@@ -8,6 +8,7 @@ const blogSchema = new Schema({
   publish_date: String,
   describtion: String,
   body: String,
+  parsed: String,
   image: {
     id: String,
     url: String,

@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import Debug from "../utils/Debug.mjs";
 import { DB_URL, PORT } from "./env.mjs";
-dotenv.config();
 
 export default function start(app) {
   mongoose.set("strictQuery", false);
