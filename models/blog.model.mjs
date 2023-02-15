@@ -22,6 +22,10 @@ const blogSchema = new Schema({
     type: String,
     default: Status.NotPublished,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default model("Blog", blogSchema);

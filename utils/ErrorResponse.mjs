@@ -1,12 +1,8 @@
-import Debug from "./Debug.mjs";
-
 export class ErrorResponse extends Error {
-  error;
   page;
   constructor(message, code) {
     super(message);
     this.code = code;
-    this.error = this.message;
   }
 }
 export class AuthError extends ErrorResponse {

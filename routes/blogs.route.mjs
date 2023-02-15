@@ -9,11 +9,10 @@ import {
   handlePublishblog,
   handleUnPublishblog,
   handleDeleteblog,
-  handleDashboardUploadImage,
+  handleBlogUploadImage,
 } from "../controllers/blogs.controller.mjs";
 import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
-import parser from "../utils/fileUpload.mjs";
-import Debug from "../utils/Debug.mjs";
+import parser from "../middlewares/fileUpload.mjs";
 
 const router = Router();
 
@@ -30,7 +29,7 @@ router.post(
   "/upload/:id",
   authorizeAdmin,
   parser.single("image-upload"),
-  handleDashboardUploadImage
+  handleBlogUploadImage
 );
 
 export default router;

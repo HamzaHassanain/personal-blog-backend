@@ -5,9 +5,10 @@ export const Status = {
 export const types = {
   blog: "blog",
   dashboard: "dashboard",
-  icon: "icon",
+  link: "link",
+  image: "image",
 };
-export const TOKEN_MAX_AGE = 24 * 60 * 60 * 3;
+
 export const Colors = {
   Reset: "\x1b[0m",
   Bright: "\x1b[1m",

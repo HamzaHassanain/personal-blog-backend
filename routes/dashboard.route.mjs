@@ -5,7 +5,7 @@ import {
   handleEditDashboard,
   handleDashboardUploadImage,
 } from "../controllers/dashboard.controller.mjs";
-import parser from "../utils/fileUpload.mjs";
+import parser from "../middlewares/fileUpload.mjs";
 import authorizeAdmin from "../middlewares/authorizeAdmin.mjs";
 
 const router = Router();

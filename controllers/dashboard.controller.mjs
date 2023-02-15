@@ -1,17 +1,17 @@
 import Debug from "../utils/Debug.mjs";
-import { createToken } from "../utils/jwt.mjs";
 import Blog from "../models/blog.model.mjs";
-import { SuccessResponse } from "../utils/successResponse.mjs";
-import { AuthError } from "../utils/ErrorResponse.mjs";
 import { types } from "../utils/consts.mjs";
 import { v2 as cloudinary } from "cloudinary";
 const MAIN_PAGE = "index";
-// const EDIT_PAGE = "edit_blogs";
 
 export const getDashboardPage = async (req, res, next) => {
   try {
-    const data = await Blog.findOne({ type: types.dashboard });
-    res.render(MAIN_PAGE, { err: null, data });
+    const [data, links] = await Promise.all([
+      Blog.findOne({ type: types.dashboard }),
+      Blog.find({ type: types.link }),
+    ]);
+
+    res.render(MAIN_PAGE, { err: null, data, links });
   } catch (error) {
     error.page = MAIN_PAGE;
     next(error);
