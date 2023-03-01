@@ -39,10 +39,8 @@ app.use("/admin/images/", authorizeAdmin, imagesRouter);
 app.use("/admin/dashboard/", authorizeAdmin, dashboardRouter);
 app.use("/admin/", adminRouter);
 
-app.get("*", authorizeAdmin, (_, __, next) => {
-  const err = new ErrorResponse("Page Not Found");
-  err.page = "404";
-  next(err);
+app.get("*", (req, res, next) => {
+  res.render("404", { err: { message: "Page Not Found" } });
 });
 
 app.use(ErrorHandler);

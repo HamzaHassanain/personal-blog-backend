@@ -5,7 +5,7 @@ import { admin_name, admin_password } from "../app/env.mjs";
 const PAGE = "login";
 export const getLoginController = async (req, res, next) => {
   try {
-    res.render(PAGE, { err: null });
+    return res.render(PAGE, { err: null });
   } catch (error) {
     error.page = PAGE;
     next(error);

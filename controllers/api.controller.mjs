@@ -10,7 +10,7 @@ import { Status, types } from "../utils/consts.mjs";
 
 export const getAllBlogs = async (req, res, next) => {
   try {
-    const blogs = await Blog.find({});
+    const blogs = await Blog.find({}, { body: 0, parsed: 0 });
     res.json(new SuccessResponse(blogs));
   } catch (err) {
     Debug.error(err);
@@ -23,7 +23,7 @@ export const getSingleBlog = async (req, res, next) => {
   const slug = req.params.slug;
   try {
     if (!slug) throw new ErrorResponse("No slug found");
-    const blog = await Blog.findOne({ slug });
+    const blog = await Blog.findOne({ slug }, { body: 0 });
     if (!blog) throw new NotFoundError(`No blog with this slug ${slug}`);
     res.json(new SuccessResponse(blog));
   } catch (err) {
@@ -36,7 +36,7 @@ export const getOfType = async (req, res, next) => {
   const type = req.params.type;
   try {
     if (!type) throw new ErrorResponse("No type found");
-    const blogs = await Blog.find({ type });
+    const blogs = await Blog.find({ type }, { parsed: 0 });
     res.json(new SuccessResponse(blogs));
   } catch (err) {
     Debug.error(err);

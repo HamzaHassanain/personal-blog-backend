@@ -46,7 +46,7 @@ export const handleAddblog = async (req, res, next) => {
   try {
     if (!body.type) throw new ErrorResponse("Blog Type is required");
     if (body.body) {
-      body.parsed = marked.parse(body.body);
+      body.parsed = marked(body.body);
     }
     const blog = new Blog(body);
     await blog.save();
@@ -61,7 +61,7 @@ export const handleEditblog = async (req, res, next) => {
   const _id = req.params.id;
   try {
     if (body.body) {
-      body.parsed = marked.parse(body.body);
+      body.parsed = marked(body.body);
     }
     await Blog.findByIdAndUpdate(_id, body);
     res.redirect("/admin/blog/edit/" + _id);
