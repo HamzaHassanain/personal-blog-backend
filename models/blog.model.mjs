@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { Status } from "../utils/consts.mjs";
+import slugify from "slugify";
 
 // import Debug from "../utils/Debug.mjs";
 
@@ -9,6 +10,7 @@ const blogSchema = new Schema({
   describtion: String,
   body: String,
   parsed: String,
+  slug: String,
   image: {
     id: String,
     url: String,
@@ -28,5 +30,9 @@ const blogSchema = new Schema({
     default: Date.now,
   },
 });
-
+blogSchema.pre("save", function () {
+  if (this.title) {
+    this.slug = slugify(this.title);
+  }
+});
 export default model("Blog", blogSchema);
