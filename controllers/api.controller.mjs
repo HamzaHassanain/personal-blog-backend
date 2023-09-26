@@ -9,8 +9,14 @@ import {
 import { Status, types } from "../utils/consts.mjs";
 
 export const getAllBlogs = async (req, res, next) => {
+  // console.log("getAllBlogs");
   try {
-    const blogs = await Blog.find({}, { body: 0, parsed: 0 });
+    // get all blogs except dashboard, image and link
+    const blogs = await Blog.find(
+      { type: { $nin: [types.dashboard, types.image, types.link] } },
+      { parsed: 0, body: 0 }
+    ).sort({ createdAt: "desc" });
+
     res.json(new SuccessResponse(blogs));
   } catch (err) {
     Debug.error(err);
@@ -37,6 +43,7 @@ export const getOfType = async (req, res, next) => {
   try {
     if (!type) throw new ErrorResponse("No type found");
     const blogs = await Blog.find({ type }, { parsed: 0 });
+    Debug.info(blogs);
     res.json(new SuccessResponse(blogs));
   } catch (err) {
     Debug.error(err);

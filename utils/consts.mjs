@@ -2,6 +2,7 @@ export const Status = {
   Published: "Published",
   NotPublished: "Not Published",
 };
+
 export const types = {
   blog: "blog",
   dashboard: "dashboard",

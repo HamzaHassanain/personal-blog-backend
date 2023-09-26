@@ -13,3 +13,7 @@ export const COOKIE_EXP = Number(
 
 export const admin_name = process.env.ADMIN_NAME;
 export const admin_password = process.env.ADMIN_PASSWORD;
+
+export const CLOUD_NAME = process.env.CLOUD_NAME;
+export const API_KEY = process.env.API_KEY;
+export const API_SECRET = process.env.API_SECRET;

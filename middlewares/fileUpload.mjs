@@ -3,13 +3,14 @@ import dotenv from "dotenv";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
+import { CLOUD_NAME, API_KEY, API_SECRET } from "../app/env.mjs";
 // import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
+  cloud_name: CLOUD_NAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET,
 });
 
 const storage = new CloudinaryStorage({
