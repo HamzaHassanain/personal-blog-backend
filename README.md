@@ -6,26 +6,26 @@
 
 This application is divided into two parts: <strong> The Admin Panel</strong>,<strong> The API</strong>
 
-To run this application you have to get <strong> Node js </strong> installed on the machine and a mongoDB database either on your local computer or hosted somewhare like mongodb atlas or something else.
+To run this application you have to get <strong> Node js </strong> installed on the machine and a MongoDB database either on your local computer or hosted somewhere like MongoDB atlas or something else.
 
-I also use Cloudinary as a storage for the image I upload form the Admin Panel. You also need a Cloudinary account or you can remove the feature of uploading to Cloudinary and upload to a local folder instead
+I also use Cloudinary as a storage for the images I upload from the Admin Panel. You also need a Cloudinary account or you can remove the feature of uploading to Cloudinary and upload to a local folder instead
 
-For the bloging part I use markdown as blogs body and then get it parsed and sanatized and sotred as HTML.
+For the blogging part, I use markdown as the blog body and then get it parsed sanitized, and stored as HTML.
 
-Also for the database I consider everything to be a Blog and then differentiate them as dashboard,link, image and the other custom user defined types
+Also for the database, I consider everything to be a Blog and then differentiate them as dashboard, link, image, and the other custom user-defined types
 
 #### The API:
 
 ```
-/api/v1/blogs/all ---> Gets all blogs of all types (the hole database)
+/api/v1/blogs/all ---> Gets all blogs of all types (the whole database)
 
-/blogs/single/:slug ---> (Gets a single blog based on the slug) (Note image,dashboard and link do not have a slug)
+/blogs/single/:slug ---> (Gets a single blog based on the slug) (Note image, dashboard, and link do not have a slug)
 
 /blogs/of-type/:type ---> (Gets all blogs of some type)
 
 ```
 
-## How to get Started with the application:
+## How to Get Started with the application:
 
 First in your terminal
 
@@ -61,13 +61,13 @@ PORT=4000
 DEV=TRUE -> To enable the debugger
 ```
 
-After this make sure you are in the directory of the application and in the termnial run:
+After this make sure you are in the directory of the application and in the terminal run:
 
 ```
 npm run dev
 ```
 
-### To remove uploading to cloudinary do the following:
+### To remove uploading to Cloudinary do the following:
 
 Got to <strong> middlewares/fileUpload.mjs </strong>
 Change:
