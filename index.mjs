@@ -45,3 +45,5 @@ app.get("*", (req, res, next) => {
 
 app.use(ErrorHandler);
 start(app); // connect to database and start server
+
+export default app;
