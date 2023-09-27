@@ -55,6 +55,10 @@ ORIGIN_ALLOWED=https://cors-opstions-for-from-where-you-will-call-the-api
 ADMIN_NAME=adminpanelusername
 
 ADMIN_PASSWORD=adminpanelpassword
+
+PORT=4000
+
+DEV=TRUE -> To enable the debugger
 ```
 
 After this make sure you are in the directory of the application and in the termnial run:
@@ -86,3 +90,11 @@ const parser = multer({ dest: 'uploads/' });
 ```
 
 #### <strong> And Create the uploads directory </strong>
+
+### How the admin looks like
+
+![](README/admin-dashboard.jpg)
+
+![](README/blogspage.jpg)
+
+![](README/singleblogpage.jpg)

@@ -112,9 +112,17 @@ export const handleBlogUploadImage = async (req, res, next) => {
     blog.image?.id && (await cloudinary.uploader.destroy(blog.image.id));
     blog.image.url = req.file.path;
     blog.image.id = req.file.filename;
-    // Debug.info(blog);
-    await blog.save();
-    res.redirect("/admin/blog/edit/" + blog.id);
+
+    const createdImage = new Blog({
+      type: types.image,
+      image: {
+        url: req.file?.path,
+        id: req.file?.filename,
+      },
+    });
+    const [resA, resB] = await Promise.all([createdImage.save(), blog.save()]);
+
+    res.redirect("/admin/blog/edit/" + resB.id);
     next();
   } catch (error) {
     error.page = EDIT_PAGE;
